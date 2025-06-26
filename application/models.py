@@ -8,6 +8,7 @@ class User(db.Model):
     username = db.Column(db.String(), nullable=False)
     password = db.Column(db.String(), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    bookings = db.relationship('Booking', backref='user', lazy=True)
     
 class Parking_lot(db.Model):
     id = db.Column(db.Integer, primary_key=True ,autoincrement=True)
@@ -16,11 +17,13 @@ class Parking_lot(db.Model):
     prime_location = db.Column(db.String(), unique=True, nullable=False)
     pincode = db.Column(db.Integer(), nullable=False)
     address = db.Column(db.String(), nullable=False)
+    spots = db.relationship('Parking_spot', backref='parking_lot', lazy=True)
 
 class Parking_spot(db.Model):
     id = db.Column(db.Integer, primary_key=True ,autoincrement=True)
     lot_id = db.Column(db.Integer(), db.ForeignKey('parking_lot.id'), nullable=False)
     is_occupied = db.Column(db.Boolean, default=False)
+    bookings = db.relationship('Booking', backref='parking_spot', lazy=True)
 
 class Booking(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
