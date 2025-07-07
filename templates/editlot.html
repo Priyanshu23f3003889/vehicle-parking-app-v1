@@ -1,0 +1,103 @@
+{% extends 'template.jinja' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row border-bottom border-info mb-5 bg-info-subtle justify-content-center">
+        <div class="col fs-5 p-1"> <img src="/static/parking.svg" width="55" height="55" alt="ParkHere">
+            <b>&nbsp;Edit Parking Lot :</b> {{lot.prime_location}}
+        </div>
+        <div class="col-3 text-center fs-5 p-3">
+            <a class="link link-primary link-underline-opacity-0" href="/">HOME</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Location :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{lot.prime_location}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-2">
+        <div class="col-3 p-2 text-end"> <b>Address :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2">{{lot.address}}
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-2">
+        <div class="col-3 p-2 text-end"> <b>Pin :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{lot.pincode}}
+        </div>
+        <div class="col-2 ">
+        </div>
+
+    </div>
+    <form method="post">
+        <div class="row justify-content-center mb-2 p-2">
+            <div class="col-3 p-2 text-end"> <b>Price :</b>
+            </div>
+            <input class="col-5 border border-primary rounded-3 p-2" type="number" placeholder="₹ {{lot.price}}"
+                name="newprice">
+            <div class="col-2 ">
+            </div>
+        </div>
+        <div class="row justify-content-center mb-4 p-2">
+            <div class="col-3 p-2 text-end"> <b>Max_spots:</b>
+            </div>
+            <input class="col-5 border border-primary rounded-3 p-2" type="number" placeholder="{{lot.max_spots}}"
+                name="newmaxspots">
+            <div class="col-2 ">
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2 p-2">
+            <div class="col-3">
+            </div>
+            <button class='col btn btn-primary' type="submit" name="action" value="update">Update</button>
+            <div class="col-1 ">
+            </div>
+            <button class='col btn btn-danger' type="submit" name="action" value="delete">Delete</button>
+            <div class="col-3 ">
+            </div>
+        </div>
+    </form>
+
+    <br>
+    <br>
+    <div class="container-fluid mb-5">
+        <div class="row border-bottom border-primary justify-content-center p-3 mb-5">
+            <div class="col-10 bg-primary-subtle rounded-pill text-primary-emphasis text-center fs-4">
+                Occupied&nbsp;Spots ({{spots|length}} / {{lot.max_spots}})
+            </div>
+        </div>
+        <table class="table text-center">
+            <thead>
+                <th>Spot&nbsp;Id</th>
+                <th>Vehical&nbsp;NO.</th>
+                <th>User&nbsp;ID</th>
+                <th>Pariking&nbsp;Time</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for spot in spots %}
+                <tr>
+                    <td>{{spot}}</td>
+                    <td>{{spots[spot].vehicle_no}}</td>
+                    <td>{{spots[spot].user_id}}</td>
+                    <td>{{spots[spot].parking}}</td>
+                    <td><a class="link-primary link-underline-opacity-0" href="/users/{{spots[spot].user_id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+{% endblock %}

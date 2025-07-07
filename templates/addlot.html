@@ -1,0 +1,36 @@
+{% extends 'template.jinja' %}
+
+{% block body %}
+<br>
+<div class="container-fluid py-2">
+    <form class="form-control-lg p-4 border-primary border-2 shadow " style="width : 65%; margin: 0 auto;"
+        method="post">
+        <h2><img src="/static/parking.svg" width="70" height="90" alt="">&nbsp; New Lot</h2>
+
+        <label for="inputlocation" class="form-label"><b>Prime location Name</b></label>
+        <input class="form-control mb-4 border-primary " id="inputlocation" type="text" name="location"
+            placeholder="location" required>
+
+        <label for="inputadd" class="form-label"><b>Address</b></label>
+        <input class="form-control mb-4  border-primary " id="inputadd" type="text" name="address" placeholder="Address"
+            required>
+
+        <label for="inputpin" class="form-label"><b>Pin Code</b></label>
+        <input class="form-control mb-4  border-primary " id="inputpin" type="number" name="pin" placeholder="Pin code"
+            required>
+
+        <label for="inputprice" class="form-label"><b>Price/hr</b></label>
+        <input class="form-control mb-4  border-primary " id="inputprice" type="number" name="price" placeholder="₹"
+            required>
+
+        <label for="inputspot" class="form-label"><b>Maximum Spots</b></label>
+        <input class="form-control mb-4  border-primary " id="inputspot" type="number" name="max"
+            placeholder="Spots" required>
+
+        <div class="d-flex justify-content-center"><button class='btn btn-success'
+                type="submit">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</button> &nbsp;&nbsp;&nbsp; <h4>/</h4>
+            &nbsp;&nbsp;Go&nbsp;<a class="link-primary link-underline-opacity-0" href="/">Home</a></div>
+</div>
+</form>
+</div>
+{% endblock %}

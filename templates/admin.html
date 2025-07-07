@@ -1,9 +1,76 @@
 {% extends "template.jinja" %}
 
 {% block body %}
+
+<nav class="navbar navbar-expand-lg bg-info-subtle">
     <div class="container-fluid">
-        <h2>Welcome to Admin Dashboard</h2>
-        <br>
-        <span>Logout? click&nbsp;<a href="/logout">here</a></span>
+        <a class="navbar-brand fs-4" href="/"><img src="/static/parking.svg" width="45" height="45"
+                alt="ParkHere"><strong>&nbsp;Admin</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 active" aria-current="page" href="/admin">Home&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 " aria-current="page" href="/users">Users&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" aria-current="page" href="/summary">Summary&nbsp;&nbsp;</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a class="link-danger link-underline-opacity-0" href="/logout"><b>LOGOUT</b></a>
+            </span>
+        </div>
     </div>
+</nav>
+
+<br>
+<div class="container-fluid">
+    <form class="row border-bottom border-primary p-3 mb-5" method="post">
+        <div class="col-4 text-primary-emphasis text-center fs-4">Parking&nbsp;Lots</div>
+        <div class="col-1"></div>
+        <div class="col-4 text-primary-emphasis text-end ">
+            <input class="form-control border-primary " id="inputEmail5" type="text" name="search"
+                placeholder="Pincode / Location">
+        </div>
+        <div class="col-3 text-primary-emphasis text-start"><button class=' col btn btn-primary'
+                type="submit">search</button></div>
+    </form>
+</div>
+
+
+
+<div class="container-fluid text-center">
+    <table class="table">
+        <thead class="table-primary">
+            <th>Id</th>
+            <th>Prime Location</th>
+            <th>Pincode</th>
+            <th>Price</th>
+            <th>Occupied</th>
+            <th><a class="link-success link-underline-opacity-0 fs-6" href="/addlot">+&nbsp;New&nbsp;Lot</a></th>
+        </thead>
+        <tbody>
+            {% for lot in parking_lots %}
+            <tr>
+                <td>{{lot.id}}</td>
+                <td>{{lot.prime_location}}</td>
+                <td>{{lot.pincode}}</td>
+                <td>₹ {{lot.price}}</td>
+                <td>{{ o[lot.id] }}/{{ lot.spots | length }}</td>
+                <td><a class="link-primary link-underline-opacity-0" href="/editlot/{{lot.id}}">Edit</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+
 {% endblock %}

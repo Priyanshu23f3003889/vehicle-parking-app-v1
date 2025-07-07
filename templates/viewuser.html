@@ -1,0 +1,86 @@
+{% extends "template.jinja" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row border-bottom border-info mb-5 bg-info-subtle justify-content-center">
+        <div class="col fs-5 p-1"> <img src="/static/parking.svg" width="55" height="55" alt="ParkHere">
+            <b>&nbsp;User id :</b> {{user.id}}
+        </div>
+        <div class="col-3 text-center fs-5 p-3">
+            <a class="link link-primary link-underline-opacity-0" href="/">HOME</a>
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Name :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{user.username}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Email :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{user.email}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Password :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{user.password}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <!-- <form class="row justify-content-center mb-2 p-1" method="post">
+        <div class="col-3 p-2 text-end">
+        </div>
+        <div class="col-5 p-2 text-center "><button value="delete" name='btn' type="submit" class="btn btn-danger">Delete</button>
+        </div>
+        <div class="col-2 ">
+        </div>
+    </form> -->
+    <br><br>
+    <div class="container-fluid mb-5">
+        <div class="row border-bottom border-primary justify-content-center p-3 mb-5">
+            <div class="col-10 bg-primary-subtle rounded-pill text-primary-emphasis text-center fs-4">
+                Bookings
+            </div>
+        </div>
+        <table class="table text-center">
+            <thead>
+                <th>Lot Id</th>
+                <th>Lot Name</th>
+                <th>Spot ID</th>
+                <th>Vehical No.</th>
+                <th>Pariking Time</th>
+                <th>Leaving Time</th>
+                <th>Cost</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for b in bookings %}
+                <tr>
+                    <td>{{b.lot_id}}</td>
+                    <td>{{lots[b.lot_id].prime_location}}</td>
+                    <td>{{b.spot_id}}</td>
+                    <td>{{b.vehicle_no}}</td>
+                    <td>{{b.parking}}</td>
+                    <td>{{b.leaving}}</td>
+                    <td>₹ {{b.cost}}</td>
+                    <td><a class="link-primary link-underline-opacity-0" href="/editlot/{{b.lot_id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+</div>
+</div>
+
+    {% endblock %}
