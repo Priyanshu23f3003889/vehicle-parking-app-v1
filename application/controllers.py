@@ -188,7 +188,7 @@ def addlot():
             
             if not prime or not add or not pin or not prc or not spots:
                 flash('\\nPlease fill all the fields !!')
-                return redirect(url_for('lot'))
+                return redirect(url_for('addlot'))
             if len(str(pin))!=6:
                 flash('\\n INVALID Pincode !!')
                 return redirect(url_for('addlot'))

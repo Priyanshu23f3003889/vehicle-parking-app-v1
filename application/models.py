@@ -30,8 +30,8 @@ class Parking_spot(db.Model):
 class Booking(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
-    lot_id = db.Column(db.Integer(), db.ForeignKey('parking_lot.id'), nullable=False)
-    spot_id = db.Column(db.Integer(), db.ForeignKey('parking_spot.id'), nullable=False)
+    lot_id = db.Column(db.Integer(), db.ForeignKey('parking_lot.id'), nullable=True)
+    spot_id = db.Column(db.Integer(), db.ForeignKey('parking_spot.id'), nullable=True)
     parking = db.Column(db.DateTime(), nullable=False)
     leaving = db.Column(db.DateTime(), nullable=True)
     vehicle_no = db.Column(db.String(), nullable=False)
