@@ -175,6 +175,7 @@ def release(id):
 
 
 
+
 @app.route("/book/<int:id>", methods=["GET","POST"])
 def book(id):
     if 'user' not in session:
