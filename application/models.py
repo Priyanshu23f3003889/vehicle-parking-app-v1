@@ -14,7 +14,7 @@ class Parking_lot(db.Model):
     id = db.Column(db.Integer, primary_key=True ,autoincrement=True)
     max_spots = db.Column(db.Integer(), nullable=False)
     price = db.Column(db.Integer(), nullable=False)
-    prime_location = db.Column(db.String(), unique=True, nullable=False)
+    prime_location = db.Column(db.String(), nullable=False)
     pincode = db.Column(db.Integer(), nullable=False)
     address = db.Column(db.String(), nullable=False)
     spots = db.relationship('Parking_spot', backref='parking_lot', lazy=True)
@@ -36,3 +36,4 @@ class Booking(db.Model):
     leaving = db.Column(db.DateTime(), nullable=True)
     vehicle_no = db.Column(db.String(), nullable=False)
     cost = db.Column(db.Integer(), nullable= True)
+    price = db.Column(db.Integer(),nullable=False)

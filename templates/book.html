@@ -1,0 +1,53 @@
+{% extends 'template.jinja' %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row rounded-3 border-bottom border-info mb-5 bg-primary-subtle justify-content-center">
+        <div class="col fs-5 p-1 text-center"> <img src="/static/parking.svg" width="50" height="50" alt="ParkHere">
+            <b>&nbsp;Book Parking Lot : </b>{{lot.prime_location}}
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Spot ID :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{spot.id}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-1">
+        <div class="col-3 p-2 text-end"> <b>Price/hr :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">₹ {{lot.price}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <div class="row justify-content-center mb-2 p-2">
+        <div class="col-3 p-2 text-end"> <b>Parking Time :</b>
+        </div>
+        <div class="col-5 bg-secondary-subtle border rounded-3 p-2 ">{{time}}
+        </div>
+        <div class="col-2 ">
+        </div>
+    </div>
+    <form method="post">
+        <div class="row justify-content-center mb-4 p-2">
+            <div class="col-3 p-2 text-end"> <b>vehicle No :</b>
+            </div>
+            <input class="col-5 border border-3 border-primary-subtle rounded-3 p-2"
+                   type="text" placeholder="Vehicle No." name="vehicle">
+            <div class="col-2">
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2 p-2">
+            <button class='col-3 btn btn-success' type="submit" name="action" value="book">Book</button>
+            <div class="col-1 ">
+            </div>
+            <a class='col-3 btn btn-danger' href="/">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

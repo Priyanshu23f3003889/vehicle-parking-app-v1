@@ -1,9 +1,128 @@
 {% extends "template.jinja" %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg bg-primary-subtle">
     <div class="container-fluid">
-        <h2>Welcome to User Dashboard</h2>
-         <br>
-        <span>Logout? click&nbsp;<a href="/logout">here</a></span>
+        <a class="navbar-brand fs-4" href="/"><img src="/static/parking.svg" width="45" height="45"
+                alt="ParkHere"><strong>&nbsp;Welcome {{user.username}}</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 active" aria-current="page" href="/user">Home&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 " aria-current="page" href="/user_history">History&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" aria-current="page" href="/summary">Summary&nbsp;&nbsp;</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a class="link-danger link-underline-opacity-0" href="/logout"><b>LOGOUT</b></a>
+            </span>
+        </div>
     </div>
+</nav>
+<br>
+<div class="container-fluid mb-5">
+    <div class="row border-bottom border-primary justify-content-center p-3 mb-5">
+        <div class="col-10 bg-info-subtle rounded-pill text-primary-emphasis text-center fs-4">
+            Recent&nbsp;Parkings
+        </div>
+    </div>
+</div>
+<div class="container mb-5">
+    <table class="table text-center">
+        <thead>
+            <th>Location</th>
+            <th>Spot ID</th>
+            <th>vehicle No.</th>
+            <th>Time</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for b in bookings%}
+            <tr>
+                {% if b.lot_id%}
+                <td>{{lt[b.lot_id].address}}</td>
+                <td>{{b.spot_id}}</td>
+                {%else%}
+                <td>Deleted</td>
+                <td>Deleted</td>
+                {%endif%}
+                <td>{{b.vehicle_no}}</td>
+                {%if b.leaving%}
+                <td>{{b.leaving}}</td>
+                {%else%}
+                <td>{{b.parking}}</td>
+                {%endif%}
+                {% if b.leaving %}
+                <td>
+                    {%if b.lot_id%}
+                    <a class="text-success" href="/book/{{b.lot_id}}">Park Again</a>
+                    {%else%}
+                    <a class="text-success" href="/">Parked Out</a>
+                    {%endif%}
+                </td>
+                {%else%}
+                <td><b><a class="link-danger link-underline-opacity-0" href="/release/{{b.id}}">Release</a></b></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+<div class="container-fluid">
+    <div class="row border-top border-3 border-dark p-3 mb-5"></div>
+    <form class="row border-bottom border-primary p-3 mb-5" method="post">
+        <div class="col-4 text-primary-emphasis text-center fs-4">Parking&nbsp;Lots</div>
+        <div class="col-1"></div>
+        <div class="col-4 text-primary-emphasis text-end ">
+            <input class="form-control border-primary " id="inputEmail5" type="text" name="search"
+                placeholder="Pincode / Location">
+        </div>
+        <div class="col-3 text-primary-emphasis text-start"><button class=' col btn btn-primary'
+                type="submit">search</button></div>
+    </form>
+</div>
+<div class="container mb-5">
+    <table class="table">
+        <thead class="table-primary">
+            <th>Id</th>
+            <th>Address</th>
+            <th>Pincode</th>
+            <th>Price/hr</th>
+            <th>Occupied</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for lot in parking_lots %}
+            <tr>
+                <td>{{lot.id}}</td>
+                <td>{{lot.address}}</td>
+                <td>{{lot.pincode}}</td>
+                <td>₹ {{lot.price}}</td>
+                <td>{{ o[lot.id] }}/{{ lot.spots | length }}</td>
+                {%if o[lot.id] == (lot.spots | length)%}
+                <td>
+                    <div class="text-danger">FULL</div>
+                </td>
+                {%else%}
+                <th><a class="link-success link-underline-opacity-0 fs-6" href="/book/{{lot.id}}">Book</a></th>
+                {%endif%}
+
+            </tr>
+
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+<br><br>
+
 {% endblock %}

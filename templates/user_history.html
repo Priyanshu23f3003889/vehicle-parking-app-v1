@@ -1,0 +1,81 @@
+{% extends 'template.jinja' %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg bg-primary-subtle">
+    <div class="container-fluid">
+        <a class="navbar-brand fs-4" href="/"><img src="/static/parking.svg" width="45" height="45"
+                alt="ParkHere"><strong>&nbsp;Welcome {{user.username}}</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 " aria-current="page" href="/user">Home&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 active" aria-current="page" href="/user_history">History&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" aria-current="page" href="/summary">Summary&nbsp;&nbsp;</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a class="link-danger link-underline-opacity-0" href="/logout"><b>LOGOUT</b></a>
+            </span>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="container-fluid mb-5">
+    <div class="row border-bottom border-primary justify-content-center p-3 mb-5">
+        <div class="col-10 bg-info-subtle rounded-pill text-primary-emphasis text-center fs-4">
+            Parkings&nbsp;History
+        </div>
+    </div>
+</div>
+<div class="container mb-5">
+    <table class="table text-center">
+        <thead>
+            <th>Address</th>
+            <th>Spot ID</th>
+            <th>vehicle No.</th>
+            <th>Parking Time</th>
+            <th>Leaving Time</th>
+            <th>Cost</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for b in bookings%}
+            <tr>
+                {% if b.lot_id%}
+                <td>{{lt[b.lot_id].address}}</td>
+                <td>{{b.spot_id}}</td>
+                {%else%}
+                <td>Deleted</td>
+                <td>Deleted</td>
+                {%endif%}
+                <td>{{b.vehicle_no}}</td>
+                <td>{{b.parking}}</td>
+                <td>{{b.leaving}}</td> 
+                <td>₹ {{b.cost}}</td>
+                {% if b.leaving %}
+                <td>
+                    {%if b.lot_id%}
+                    <a class="text-success" href="/book/{{b.lot_id}}">Park Again</a>
+                    {%else%}
+                    <a class="text-success" href="/">Parked Out</a>
+                    {%endif%}
+                </td>
+                {%else%}
+                <td><b><a class="link-danger link-underline-opacity-0" href="/release/{{b.id}}">Release</a></b></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+{% endblock %}

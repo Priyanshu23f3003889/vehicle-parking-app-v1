@@ -35,14 +35,6 @@
         <div class="col-2 ">
         </div>
     </div>
-    <!-- <form class="row justify-content-center mb-2 p-1" method="post">
-        <div class="col-3 p-2 text-end">
-        </div>
-        <div class="col-5 p-2 text-center "><button value="delete" name='btn' type="submit" class="btn btn-danger">Delete</button>
-        </div>
-        <div class="col-2 ">
-        </div>
-    </form> -->
     <br><br>
     <div class="container-fluid mb-5">
         <div class="row border-bottom border-primary justify-content-center p-3 mb-5">
@@ -65,7 +57,11 @@
                 {% for b in bookings %}
                 <tr>
                     <td>{{b.lot_id}}</td>
+                    {% if b.lot_id%}
                     <td>{{lots[b.lot_id].prime_location}}</td>
+                    {%else%}
+                    <td>Deleted</td>
+                    {%endif%}
                     <td>{{b.spot_id}}</td>
                     <td>{{b.vehicle_no}}</td>
                     <td>{{b.parking}}</td>
