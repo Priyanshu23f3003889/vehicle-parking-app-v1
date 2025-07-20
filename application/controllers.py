@@ -583,6 +583,28 @@ def bookings():
         return render_template('bookings.html', bookings=b)
     
     return redirect(url_for('user'))
+
+
+
+
+
+@app.route('/booking/<int:id>', methods=["GET","POST"])
+def viewbooking(id):
+    
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    u=User.query.get(session['user'])
+    
+    if u.is_admin==True:
+        b=Booking.query.get(id)
+        if b:
+            return render_template('viewbooking.html', booking=b)
+        else:
+            flash("Invalid booking ID")
+            return redirect(url_for("admin"))
+    
+    return redirect(url_for('user'))
     
     
 

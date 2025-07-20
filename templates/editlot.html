@@ -87,7 +87,7 @@
                     <td>{{spot.id}}</td>
                     {% if spot.is_occupied %}
                     <td><div class="text-danger">Occupied</div></td>
-                    <td><a class="link-primary link-underline-opacity-0" href="/users/{{bookings[spot.booking_id].user_id}}"><b>View</b></a></td>
+                    <td><a class="link-primary link-underline-opacity-0" href="/booking/{{spot.booking_id}}"><b>View</b></a></td>
                     {% else %}
                     <td><div class="text-success">Available</div></td>
                     <td><form method="post"><button type="submit" name="action" value="{{spot.id}}" class="btn btn-link-color link-danger"><b>Delete</b></button></form></td>
