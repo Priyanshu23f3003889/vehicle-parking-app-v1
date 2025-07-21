@@ -1,3 +1,4 @@
 falsk
+SQLalchemy
 flask_sqlalchemy
 matplotlib
