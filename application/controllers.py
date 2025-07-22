@@ -213,7 +213,7 @@ def book(id):
             db.session.commit()
 
             spot.is_occupied=True
-            spot.booking_id=booking.id
+            # spot.booking_id=booking.id
             db.session.commit()
 
             flash("Booking Successfull!!")
