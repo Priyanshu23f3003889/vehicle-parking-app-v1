@@ -16,7 +16,7 @@
 <li>Install all the required Python Modules From the requirement.txt file.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For that oepn the Terminal in root directory of the Project.<br> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then Run the command - <pre>pip install -r requirement.txt</pre><br>
-<li>Whith your Terminal in the root directory.<br>
+<li>With your Terminal in the root directory.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run - <pre>python app.py</pre><br>
 <li>Now Open Your Browser And Go to - <a href="http://127.0.0.1">http://127.0.0.1</a><br><br>
 <hr>
